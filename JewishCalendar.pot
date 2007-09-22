@@ -1,0 +1,287 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# No version information was available in the source files.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2007-09-23 08:20+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: JewishCalendar.php:151
+msgid "Tishrei"
+msgstr ""
+
+#: JewishCalendar.php:152
+msgid "Heshvan"
+msgstr ""
+
+#: JewishCalendar.php:153
+msgid "Kislev"
+msgstr ""
+
+#: JewishCalendar.php:154
+msgid "Tevet"
+msgstr ""
+
+#: JewishCalendar.php:155
+msgid "Shevat"
+msgstr ""
+
+#: JewishCalendar.php:156
+msgid "Adar"
+msgstr ""
+
+#: JewishCalendar.php:157
+msgid "Adar II"
+msgstr ""
+
+#: JewishCalendar.php:158
+msgid "Nisan"
+msgstr ""
+
+#: JewishCalendar.php:159
+msgid "Iyar"
+msgstr ""
+
+#: JewishCalendar.php:160
+msgid "Sivan"
+msgstr ""
+
+#: JewishCalendar.php:161
+msgid "Tamuz"
+msgstr ""
+
+#: JewishCalendar.php:162
+msgid "Av"
+msgstr ""
+
+#: JewishCalendar.php:163
+msgid "Elul"
+msgstr ""
+
+#: JewishCalendar.php:168
+msgid "Adar I"
+msgstr ""
+
+#: JewishCalendar.php:521
+msgid "Erev Rosh HaShana"
+msgstr ""
+
+#: JewishCalendar.php:522
+msgid "Rosh HaShana I"
+msgstr ""
+
+#: JewishCalendar.php:523
+msgid "Rosh HaShana II"
+msgstr ""
+
+#: JewishCalendar.php:524
+msgid "Tsom Gedalya"
+msgstr ""
+
+#: JewishCalendar.php:525
+msgid "Erev Yom Kippur"
+msgstr ""
+
+#: JewishCalendar.php:526
+msgid "Yom Kippur"
+msgstr ""
+
+#: JewishCalendar.php:527
+msgid "Erev Sukkot"
+msgstr ""
+
+#: JewishCalendar.php:528
+msgid "Sukkot"
+msgstr ""
+
+#: JewishCalendar.php:529
+msgid "Sukkot II (Diaspora)"
+msgstr ""
+
+#: JewishCalendar.php:530
+msgid "Khol HaMoed Sukkot"
+msgstr ""
+
+#: JewishCalendar.php:531
+msgid "Hoshana Rabba"
+msgstr ""
+
+#: JewishCalendar.php:532
+msgid "Shemini Atseret"
+msgstr ""
+
+#: JewishCalendar.php:533
+msgid "Simkhat Tora"
+msgstr ""
+
+#: JewishCalendar.php:534
+msgid "Isru Khag Sukkot"
+msgstr ""
+
+#: JewishCalendar.php:537
+msgid "Khanukka I"
+msgstr ""
+
+#: JewishCalendar.php:538
+msgid "Khanukka II"
+msgstr ""
+
+#: JewishCalendar.php:539
+msgid "Khanukka III"
+msgstr ""
+
+#: JewishCalendar.php:540
+msgid "Khanukka IV"
+msgstr ""
+
+#: JewishCalendar.php:541
+msgid "Khanukka V"
+msgstr ""
+
+#: JewishCalendar.php:542
+msgid "Khanukka VI"
+msgstr ""
+
+#: JewishCalendar.php:543
+msgid "Khanukka VII"
+msgstr ""
+
+#: JewishCalendar.php:544
+msgid "Khanukka VIII"
+msgstr ""
+
+#: JewishCalendar.php:547
+msgid "Tsom Tevet"
+msgstr ""
+
+#: JewishCalendar.php:550
+msgid "Tu BiShevat"
+msgstr ""
+
+#: JewishCalendar.php:553
+msgid "Taanit Esther"
+msgstr ""
+
+#: JewishCalendar.php:554
+msgid "Purim"
+msgstr ""
+
+#: JewishCalendar.php:555
+msgid "Shushan Purim"
+msgstr ""
+
+#: JewishCalendar.php:558
+msgid "Erev Pesakh"
+msgstr ""
+
+#: JewishCalendar.php:559
+msgid "Pesakh"
+msgstr ""
+
+#: JewishCalendar.php:560
+msgid "Pesakh II (Diaspora)"
+msgstr ""
+
+#: JewishCalendar.php:561
+msgid "Khol HaMoed Pesakh"
+msgstr ""
+
+#: JewishCalendar.php:562
+msgid "Pesakh VII"
+msgstr ""
+
+#: JewishCalendar.php:563
+msgid "Pesakh VIII (Diaspora)"
+msgstr ""
+
+#: JewishCalendar.php:564
+msgid "Isru Khag Pesakh"
+msgstr ""
+
+#: JewishCalendar.php:565
+msgid "Sefirat HaOmer"
+msgstr ""
+
+#: JewishCalendar.php:566
+msgid "Yom HaShoa"
+msgstr ""
+
+#: JewishCalendar.php:569
+msgid "Yom HaZikaron"
+msgstr ""
+
+#: JewishCalendar.php:570
+msgid "Yom HaAtsmaut"
+msgstr ""
+
+#: JewishCalendar.php:571
+msgid "Lag BaOmer"
+msgstr ""
+
+#: JewishCalendar.php:572
+msgid "Yom Yerushalayim"
+msgstr ""
+
+#: JewishCalendar.php:575
+msgid "Erev Shavuot"
+msgstr ""
+
+#: JewishCalendar.php:576
+msgid "Shavuot"
+msgstr ""
+
+#: JewishCalendar.php:577
+msgid "Shavuot II (Diaspora)"
+msgstr ""
+
+#: JewishCalendar.php:578
+msgid "Isru Khag Shavuot"
+msgstr ""
+
+#: JewishCalendar.php:581
+msgid "Tsom Tamuz"
+msgstr ""
+
+#: JewishCalendar.php:584
+msgid "Tisha BeAv"
+msgstr ""
+
+#: NativeCalendar.php:199
+msgid "Sun"
+msgstr ""
+
+#: NativeCalendar.php:199
+msgid "Mon"
+msgstr ""
+
+#: NativeCalendar.php:199
+msgid "Tue"
+msgstr ""
+
+#: NativeCalendar.php:199
+msgid "Wed"
+msgstr ""
+
+#: NativeCalendar.php:199
+msgid "Thu"
+msgstr ""
+
+#: NativeCalendar.php:199
+msgid "Fri"
+msgstr ""
+
+#: NativeCalendar.php:199
+msgid "Sat"
+msgstr ""
+

@@ -1,0 +1,152 @@
+<!-- $Id$ -->
+
+<div dir="ltr" class="instructions">
+
+<hr />
+
+<h2>The Source Code</h2>
+
+<p>You may download the <a href="cal.tar.gz">source code</a> and use it
+on your website. It's GPLed.</p>
+
+<h2>The API</h2>
+
+<p>The most important part of the code is the <code>JewishCalendar</code> PHP class.
+It contains the 'brain' that calculates the holidays. It is derived from
+the base class <code>NativeCalendar</code>, so you should add also this to the
+bundle. The rest of the code, including the GUI you see here, is
+considered a demonstration of how to use this class and is appropriately
+contained in files having 'demo' in their names (e.g. 'demo.php').</p>
+
+<p>Here's a taste of the API:</p>
+
+<pre>
+require_once 'NativeCalendar.php';
+
+$jcal = NativeCalendar::factory('Jewish'); // In the future there may be Drivers
+                                           // for other calendars.
+
+$jcal->settings(array(
+  'language' => CAL_LANG_NATIVE, // Speak in Hebrew, not English.
+  'diaspora' => FALSE,           // We don't live abroad.
+  'eves'     => TRUE,            // Give us 'Erev Rosh HaShana' too.
+));
+
+// Let's print the holidays for the next 20 days.
+
+$timestamp = time();
+
+for ($n = 20; $n--; ) {
+  print 'Holidays for '. date('Y-m-d', $timestamp) .":\n";
+  foreach ($jcal->getHolidays($timestamp) as $holiday) {
+    print "   $holiday[name]\n";
+  } 
+  $timestamp += 60*60*24; // Advance to the next day
+}
+</pre>
+
+<p>The output of this snippet is:</p>
+
+<pre>
+Holidays for 2007-09-20:
+Holidays for 2007-09-21:
+   ערב יום הכיפורים
+Holidays for 2007-09-22:
+   יום הכיפורים
+Holidays for 2007-09-23:
+Holidays for 2007-09-24:
+Holidays for 2007-09-25:
+Holidays for 2007-09-26:
+   ערב סוכות
+Holidays for 2007-09-27:
+   סוכות
+Holidays for 2007-09-28:
+   חול המועד סוכות
+Holidays for 2007-09-29:
+   חול המועד סוכות
+Holidays for 2007-09-30:
+   חול המועד סוכות
+Holidays for 2007-10-01:
+   חול המועד סוכות
+Holidays for 2007-10-02:
+   חול המועד סוכות
+Holidays for 2007-10-03:
+   הושענא רבה
+Holidays for 2007-10-04:
+   שמיני עצרת
+&lrm;   שמחת תורה
+Holidays for 2007-10-05:
+Holidays for 2007-10-06:
+Holidays for 2007-10-07:
+Holidays for 2007-10-08:
+Holidays for 2007-10-09:
+</pre>
+
+<p>Let's have another script...</p>
+
+<pre>
+// Print today's date:
+print $jcal->getLongDate(time()) ."\n";
+
+// Now in English:
+$jcal->settings(array('language' => CAL_LANG_FOREIGN));
+print $jcal->getLongDate(time()) ."\n";
+
+// When did the first man land on the moon?
+print $jcal->getLongDate('1969-07-20') ."\n";
+</pre>
+
+<p>...which outputs:</p>
+
+<pre>
+ח' תשרי ה'תשס"ח
+8 Tishrei, 5768
+5 Av, 5729
+</pre>
+
+<h2>Localization</h2>
+
+<p>The calendar comes speaking in two languages: Hebrew and English. But
+you can make it speak any other language. This is due to the fact that
+all English strings --month names and holiday names-- are enveloped in a
+special function. Mavens will recognize this as "the Gettext method of
+localizing strings." I chose the name 't' for this function.</p>
+
+<p>In some projects you'd use various <code>gettext</code> tools to
+extract (see <a href="JewishCalendar.pot">JewishCalendar.pot</a>) and
+translate the strings, but it's actually enough to implement a
+simple-minded <code>t()</code> function in your script. Here's an
+example:</p>
+
+<pre>
+require 'NativeCalendar.php';
+
+$jcal = NativeCalendar::factory('Jewish'); // In da future they may be drivers
+                                           // fo otha calendars.
+$jcal->settings(array(
+  'language' => CAL_LANG_FOREIGN,
+  'diaspora' => TRUE,
+));
+
+function t($s) {
+  static $table = array(
+    'Tishrei' => 'Teeshre',
+    'Erev Rosh HaShana' => 'Justa little bit before da start of da year.',
+    'Rosh HaShana I' => 'Da start of da year.',
+    'Rosh HaShana II' => 'Anotha start of da year, man. See? There be two.',
+    'Yom Kippur' => "Da 'No TV' day.",
+    'Tsom Gedalya' => 'Rememba poor Gedalya, OK?',
+    'Sukkot' => "You's squizin' yo' TV inside this thingy a here.",
+  );
+  if (isset($table[$s])) {
+    return $table[$s];
+  } else {
+    return $s;
+  }
+}
+
+// Dig dis:
+print $jcal->printCal(2007, 9);
+</pre>
+
+</div> <!-- LTR -->

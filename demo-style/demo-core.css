@@ -1,0 +1,104 @@
+/* $Id$ */
+
+table.calendar {
+  border-collapse: collapse;
+}
+
+/* When we print out a calendar and hang it on the wall we don't
+   want to highlight 'today'... because the day we printed out
+   this sheet of paper is irrelevant. */
+@media screen {
+  td.today {
+    background: url(footsteps.gif) no-repeat center;
+  }
+}
+
+td.day {
+  width: 4.8em;
+  height: 4.8em;
+  padding: 0.2em;
+  border: 1px solid #000;
+  vertical-align: top;
+  background-color: #fff;
+}
+
+td.day-header {
+  text-align: center;
+  font-weight: bolder;
+  font-size: smaller;
+}
+
+td.empty-day {
+}
+
+.native-number {
+  color: #f00;
+}
+
+.gregorian-number {
+}
+
+.month-name {
+  font-size: smaller;
+}
+
+.holiday-name {
+  padding-top: 0.6em;
+  font-size: smaller;
+}
+
+/*
+  The following 4 colors were taken from "Jewish Calendar for Linux"
+    by Refoyl Finkl
+*/
+td.taanit {
+  background-color: #ffa1ff;
+}
+td.shabat {
+  background-color: #00d200;
+}
+td.khol {
+  background-color: #a4ff00;
+}
+td.spec {
+  background-color: #00ffff;
+}
+
+td.omer {
+  background-color: #e3d564;
+}
+
+/* Put the gregorian number 'farther' on the box. This depends
+   on the directionality of the page. */
+html.rtl .gregorian-number {
+  float: left;
+}
+html.rtl .native-number {
+}
+html.ltr .gregorian-number {
+  float: right;
+}
+html.ltr .native-number {
+}
+
+/* Some adjustemenet for the print media:
+   - make the table cells higher so that we have room to scribble inside in pencil.
+   - use light grey colors for the holidays, because else they may end up too dark.
+*/
+@media print {
+
+  td.day {
+    width: 6em;
+    height: 8em;
+  }
+
+  .native-number {
+    font-size: 0.5em;
+    color: #000;
+  }
+
+  td.spec, td.taanit, td.shabat, td.khol, td.omer {
+    background-color: #f0f0f0;
+  }
+
+}

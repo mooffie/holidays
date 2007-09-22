@@ -1,0 +1,104 @@
+/* $Id$ */
+
+body {
+  color: #000;
+  background-color: #fff;
+  font-family: sans-serif;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+#preferences {
+  display: inline;
+  margin-top: 2em;
+}
+
+html.rtl #preferences {
+  float: left;
+}
+
+html.ltr #preferences {
+  float: right;
+}
+
+table.calendar {
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#method-warning {
+  color: #f00;
+  width: 10em;
+}
+
+.navigator-table {
+}
+
+.navigator-table td {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.navigator-today {
+  text-align: center;
+  font-weight: bold;
+}
+
+.navigator {
+  text-align: center;
+  font-size: 130%;
+  margin: 0.5em;
+}
+
+a {
+  color: #0000ee;
+}
+a:visited {
+  color: #0000ee;
+}
+
+.title {
+  font-family: serif;
+  text-align: center;
+  font-weight: bold;
+  font-size: 220%;
+  margin-bottom: 0.6em;
+}
+
+.calendar-range {
+  text-align: center;
+  font-weight: bold;
+}
+
+.navigator select {
+  font-size: 110%;
+  font-family: sans-serif;
+}
+
+pre {
+  padding: .8em;
+  background: #eee;
+  font-size: smaller;
+}
+
+.instructions p {
+  line-height: 130%;
+}
+
+@media print {
+
+  body {
+    margin: 0px;
+    font-family: serif;
+  }
+
+  .navigator-today, .instructions, #preferences {
+    display: none;
+  }
+  
+  select {
+    font-family: serif;
+  }
+
+}
