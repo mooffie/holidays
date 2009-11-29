@@ -1,10 +1,5 @@
 <!-- $Id$ -->
 
-<h2>The Source Code</h2>
-
-<p>You may download the <a href="cal.tar.gz">source code</a> and use it
-on your website. It's GPLed.</p>
-
 <h2>The API</h2>
 
 <p>The most important part of the code is the <code>JewishCalendar</code> PHP class.

@@ -214,5 +214,6 @@ print_link(trans('iCal feed', 'פיד iCal'), create_url($year, $month, TRUE));
 
 print '<div dir="ltr" class="instructions">';
 print '<hr />';
+require_once dirname(__FILE__) .'/README.txt';
 require_once dirname(__FILE__) .'/API.txt';
 print '</div> <!-- LTR -->';
