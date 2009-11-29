@@ -8,7 +8,7 @@
 
 error_reporting(E_ALL);
 
-require_once dirname(__FILE__) .'/NativeCalendar.php'; // Provides the calendar object. The 'engine.'
+require_once dirname(__FILE__) .'/lib/NativeCalendar.php'; // Provides the calendar object. The 'engine.'
 require_once dirname(__FILE__) .'/demo.inc'; // Utility functions
 
 // $now contains today's date, and will be highlighted on the calendar printed.
