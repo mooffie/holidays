@@ -211,5 +211,8 @@ print $jcal->printCal($year, $month);
 print "<br />";
 print_link(trans('iCal feed', 'פיד iCal'), create_url($year, $month, TRUE));
 
-require_once dirname(__FILE__) .'/demo.help';
 
+print '<div dir="ltr" class="instructions">';
+print '<hr />';
+require_once dirname(__FILE__) .'/API.txt';
+print '</div> <!-- LTR -->';

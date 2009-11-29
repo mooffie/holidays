@@ -1,9 +1,5 @@
 <!-- $Id$ -->
 
-<div dir="ltr" class="instructions">
-
-<hr />
-
 <h2>The Source Code</h2>
 
 <p>You may download the <a href="cal.tar.gz">source code</a> and use it
@@ -148,5 +144,3 @@ function t($s) {
 // Dig dis:
 print $jcal->printCal(2007, 9);
 </pre>
-
-</div> <!-- LTR -->
