@@ -22,13 +22,17 @@ class NativeCalendar {
    * You may use this function to instantiate calendar objects.
    *
    * Instead of <code>$cal = new JewishCalendar</code>, do
-   * <code>$cal = NativeCalendar::factor('Jewish')</code>.
+   * <code>$cal = NativeCalendar::factory('Jewish')</code>.
    *
+   * @static
    * @param string $id
-   * @rturn object
+   * @return object
    */
   function factory($id, $settings = NULL) {
     $filename = dirname(__FILE__) .'/'. $id .'Calendar.php';
+    if (!file_exists($filename)) {
+      return NULL;
+    }
     require_once $filename;
     $classname = $id .'Calendar';
     $obj = new $classname;
@@ -38,6 +42,28 @@ class NativeCalendar {
       $obj->settings($settings);
     }
     return $obj;
+  }
+
+  /**
+   * Get installed calendars.
+   *
+   * @static
+   * @return array
+   */
+  function factory_list() {
+    static $list = array();
+    if ($list) {
+      return $list;
+    }
+    $dir = opendir(dirname(__FILE__));
+    while (($file = readdir($dir)) !== FALSE) {
+      if (preg_match('/(.*)Calendar\.php$/', $file, $m) && ($file != 'NativeCalendar.php')) {
+        $list[$m[1]] = $m[1];
+      }
+    }
+    closedir($dir);
+    // TODO: sort alphabetically?
+    return $list;
   }
 
   function NativeCalendar() {
