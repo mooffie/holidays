@@ -43,14 +43,13 @@ class HijriCalendar extends NativeCalendar {
     }
   }
 
-  function settings_form() {
-    $form = parent::settings_form();
-    $form['language']['#options'][CAL_LANG_NATIVE] = t('Arabic');
-    return $form;
-  }
-
   function is_rtl() {
     return TRUE;
+  }
+
+  // Implements NativeCalendar::native_language()
+  function native_language() {
+    return array('ar' => t('Arabic'));
   }
 
   // Implements NativeCalendar::getNumber()

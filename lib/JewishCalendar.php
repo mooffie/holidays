@@ -65,7 +65,6 @@ class JewishCalendar extends NativeCalendar {
   // Implements NativeCalendar::settings_form()
   function settings_form() {
     $form = parent::settings_form();
-    $form['language']['#options'][CAL_LANG_NATIVE] = t('Hebrew');
     $form['diaspora'] = array(
       '#type' => 'radios',
       '#title' => t('Method'),
@@ -97,6 +96,11 @@ class JewishCalendar extends NativeCalendar {
   // Implements NativeCalendar::is_rtl()
   function is_rtl() {
     return TRUE;
+  }
+
+  // Implements NativeCalendar::native_language()
+  function native_language() {
+    return array('he' => t('Hebrew'));
   }
 
   // Implements NativeCalendar::getNumber()

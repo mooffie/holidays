@@ -95,6 +95,13 @@ class NativeCalendar {
   }
 
   /**
+   * Overridable; Returns the native language of this calendar.
+   */
+  function native_language() {
+    return array('en' => t('English'));
+  }
+
+  /**
    * Set one of more settings.
    *
    * Various calendars may have various settings. Instead of
@@ -134,7 +141,7 @@ class NativeCalendar {
       '#title' => t('The language in which to print dates and holiday names'),
       '#options' => array(
         CAL_LANG_FOREIGN => t("The website's language"),
-        CAL_LANG_NATIVE  => t("The calendar's native language"),
+        CAL_LANG_NATIVE  => current($this->native_language()),
       ),
       '#default_value' => $this->settings['language'],
     );
