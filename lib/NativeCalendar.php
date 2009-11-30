@@ -36,8 +36,8 @@ class NativeCalendar {
     require_once $filename;
     $classname = $id .'Calendar';
     $obj = new $classname;
-    // All talk defauls to English.
-    $obj->settings(array('language' => CAL_LANG_FOREIGN));
+    // We keep the ID around in case some 3rd party code may with to use it:
+    $obj->name = $id;
     if (isset($settings)) {
       $obj->settings($settings);
     }
@@ -67,6 +67,9 @@ class NativeCalendar {
   }
 
   function NativeCalendar() {
+    $this->settings = array();
+    // All talk defaults to English.
+    $this->settings['language'] = CAL_LANG_FOREIGN;
     // We provide for a possible localization function, t().
     // If it's not already defined by the host system (e.g. your CMS), we 
     // implement a dummy one.
@@ -75,6 +78,20 @@ class NativeCalendar {
         return $s;
       }
     }
+  }
+
+  /**
+   * Get the title of this calendar.
+   */
+  function title() {
+    die('Error: pure virtual function NativeCalendar::title() called');
+  }
+
+  /**
+   * Overridable; Return TRUE if the calendar's native language is right to left.
+   */
+  function is_rtl() {
+    return FALSE;
   }
 
   /**

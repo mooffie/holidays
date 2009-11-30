@@ -44,18 +44,32 @@ class JewishCalendar extends NativeCalendar {
    */
   function JewishCalendar() {
     parent::NativeCalendar();
-    $this->settings = array();
     // Initialize defaults:
-    $this->settings['language'] = CAL_LANG_FOREIGN;
-    $this->settings['diaspora'] = FALSE;
-    $this->settings['eves'] = TRUE;
-    $this->settings['isru'] = FALSE;
-    $this->settings['sefirat_omer'] = FALSE;
+    $this->settings += array(
+      'diaspora' => FALSE,
+      'eves' => TRUE,
+      'isru' => FALSE,
+      'sefirat_omer' => FALSE,
+    );
+  }
+
+  // Implements NativeCalendar::title()
+  function title() {
+    if ($this->settings['language'] == CAL_LANG_NATIVE) {
+      return 'לוח שנה עברי';
+    } else {
+      return t('Jewish Calendar');
+    }
   }
 
   // Implements NativeCalendar::settings()
   function settings($settings) {
     $this->settings = array_merge($this->settings, $settings);
+  }
+
+  // Implements NativeCalendar::is_rtl()
+  function is_rtl() {
+    return TRUE;
   }
 
   // Implements NativeCalendar::getNumber()
