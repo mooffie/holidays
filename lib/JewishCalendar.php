@@ -58,13 +58,40 @@ class JewishCalendar extends NativeCalendar {
     if ($this->settings['language'] == CAL_LANG_NATIVE) {
       return 'לוח שנה עברי';
     } else {
-      return t('Jewish Calendar');
+      return t('Jewish calendar');
     }
   }
 
-  // Implements NativeCalendar::settings()
-  function settings($settings) {
-    $this->settings = array_merge($this->settings, $settings);
+  // Implements NativeCalendar::settings_form()
+  function settings_form() {
+    $form = parent::settings_form();
+    $form['language']['#options'][CAL_LANG_NATIVE] = t('Hebrew');
+    $form['diaspora'] = array(
+      '#type' => 'radios',
+      '#title' => t('Method'),
+      '#description' => t('The method used to calculate the holidays. Some holidays are observed two days when outside of Israel.'),
+      '#options' => array(
+        1 => t('Diaspora'),
+        0 => t('Land of Israel'),
+      ),
+      '#default_value' => (int)$this->settings['diaspora'],
+    );
+    $form['eves'] = array(
+      '#type'  => 'checkbox',
+      '#title' => t('Show holiday eves'),
+      '#default_value' => $this->settings['eves'],
+    );
+    $form['isru'] = array(
+      '#type'  => 'checkbox',
+      '#title' => t('Show Isru hags'),
+      '#default_value' => $this->settings['isru'],
+    );
+    $form['sefirat_omer'] = array(
+      '#type'  => 'checkbox',
+      '#title' => t('Show Sefirat HaOmer'),
+      '#default_value' => $this->settings['sefirat_omer'],
+    );
+    return $form;
   }
 
   // Implements NativeCalendar::is_rtl()

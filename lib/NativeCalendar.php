@@ -36,7 +36,7 @@ class NativeCalendar {
     require_once $filename;
     $classname = $id .'Calendar';
     $obj = new $classname;
-    // We keep the ID around in case some 3rd party code may with to use it:
+    // We keep the ID around in case some 3rd party code may wish to use it:
     $obj->name = $id;
     if (isset($settings)) {
       $obj->settings($settings);
@@ -98,8 +98,8 @@ class NativeCalendar {
    * Set one of more settings.
    *
    * Various calendars may have various settings. Instead of
-   * defining a separate setXYZ() function for each setting, calendars are
-   * required to implement a central settings() method.
+   * defining a separate setXYZ() function for each setting, we elect for
+   * a central settings() method.
    *
    * A setting which all calendars are required to support is the 'language' setting. 
    * If may either be CAL_LANG_NATIVE or CAL_LANG_FOREIGN and it determines
@@ -108,7 +108,37 @@ class NativeCalendar {
    * @param array $settings
    */
   function settings($settings) {
-    die('Error: pure virtual function NativeCalendar::settings() called');
+    $this->settings = array_merge($this->settings, $settings);
+  }
+
+  // @todo: do we need this?
+  //function settings_get() {
+  //  return $this->settings;
+  //}
+
+  // @todo: do we need this?
+  function settings_keys() {
+    return array_keys($this->settings);
+  }
+
+  /**
+   * Get a form used to interactively edit the settings. Calendars should 
+   * override this method.
+   *
+   * This is the only code in this library that's Drupal-dependant. We'd better
+   * move it to the Drupal module itself.
+   */
+  function settings_form() {
+    $form['language'] = array(
+      '#type' => 'radios',
+      '#title' => t('The language in which to print dates and holiday names'),
+      '#options' => array(
+        CAL_LANG_FOREIGN => t("The website's language"),
+        CAL_LANG_NATIVE  => t("The calendar's native language"),
+      ),
+      '#default_value' => $this->settings['language'],
+    );
+    return $form;
   }
 
   /**
