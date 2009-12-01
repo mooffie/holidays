@@ -145,7 +145,13 @@ class JewishCalendar extends NativeCalendar {
       );
     }
     else if (is_numeric($date)) {
-      return $this->convertToNative(array('jdc' => unixtojd($date)));
+      // We've got a unix tiemstamp.
+      //
+      // Note: there's actually a unixtojd() PHP function, but we aren't using 
+      // it because we want to give the embedding application a chance to take
+      // over the UTC-to-local conversion.
+      $decoder = $this->timestamp_decoding_function;
+      return $this->convertToNative($decoder($date));
     }
     else if (preg_match('/^(\d\d\d\d)-(\d\d)-(\d\d)(?: |T|$)/', $date, $m)) {
       return $this->convertToNative(array('jdc' => gregoriantojd($m[2], $m[3], $m[1])));

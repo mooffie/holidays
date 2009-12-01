@@ -94,7 +94,8 @@ class HijriCalendar extends NativeCalendar {
       );
     }
     else if (is_numeric($date)) {
-      return $this->convertToNative(array('jdc' => unixtojd($date)));
+      $decoder = $this->timestamp_decoding_function;
+      return $this->convertToNative($decoder($date));
     }
     else if (preg_match('/^(\d\d\d\d)-(\d\d)-(\d\d)(?: |T|$)/', $date, $m)) {
       return $this->convertToNative(array('jdc' => gregoriantojd($m[2], $m[3], $m[1])));

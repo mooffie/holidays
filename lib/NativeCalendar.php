@@ -18,6 +18,20 @@ define('CAL_LANG_NATIVE',  1);
  */
 class NativeCalendar {
 
+  var $timestamp_decoding_function = 'getdate';
+
+  /**
+   * When the calendar is asked to convert a unix timestamp to a native date,
+   * it first needs to convert the timestamp --which is given in UTC-- to local
+   * time. By default it uses getdate() for this conversion, but you may
+   * register a function of your own. Your function must return an array
+   * containing three keyed elements: 'year', 'mon', 'mday' (other keys are
+   * ignored).
+   */
+  function set_timestamp_decoding_function($function) {
+    $this->timestamp_decoding_function = $function;
+  }
+
   /**
    * You may use this function to instantiate calendar objects.
    *
@@ -116,6 +130,7 @@ class NativeCalendar {
    */
   function settings($settings) {
     $this->settings = array_merge($this->settings, $settings);
+    return $this; // Allow for "fluid syntax".
   }
 
   // @todo: do we need this?
