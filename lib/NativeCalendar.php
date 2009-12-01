@@ -132,6 +132,22 @@ class NativeCalendar {
     $this->settings = array_merge($this->settings, $settings);
     return $this; // Allow for "fluid syntax".
   }
+  
+  /**
+   * Clones the calendar object.
+   *
+   * (Note: "clone" is a reserved word in PHP, so we name it "copy" instead).
+   *
+   * This is merely "syntactic sugar". It allows you to write, e.g.,
+   * <code>print some_factory('Jewish')->copy()->settings(...)->getLongDate(time())</code>
+   *
+   * (In that specific example we use ->copy() in order to not affect the 
+   * object that some_factory() may potentially cache.)
+   */
+  function copy() {
+    $clone = version_compare(phpversion(), '5.0') < 0 ? $this : clone($this);
+    return $clone;
+  }
 
   // @todo: do we need this?
   //function settings_get() {
