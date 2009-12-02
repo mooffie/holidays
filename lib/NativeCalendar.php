@@ -154,8 +154,10 @@ class NativeCalendar {
   //  return $this->settings;
   //}
 
-  // @todo: do we need this?
-  function settings_keys() {
+  /**
+   * Returns a list of all the settings this calendar supports.
+   */
+  function settings_list() {
     return array_keys($this->settings);
   }
 
@@ -177,6 +179,21 @@ class NativeCalendar {
       '#default_value' => $this->settings['language'],
     );
     return $form;
+  }
+
+  /**
+   * Save the form's values back into $this->settings.
+   *
+   * You need to override this method if your form has complicated fields that
+   * need some interpretation before assigned to the settings.
+   */
+  function settings_form_save($form_values) {
+    // We can't use array_intersect_key() because it ain't in PHP4.
+    $settings = array();
+    foreach ($this->settings_list() as $key) {
+      $settings[$key] = $form_values[$key];
+    }
+    $this->settings($settings);
   }
 
   /**
