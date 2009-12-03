@@ -149,10 +149,19 @@ class NativeCalendar {
     return $clone;
   }
 
-  // @todo: do we need this?
-  //function settings_get() {
-  //  return $this->settings;
-  //}
+  /**
+   * This method is the "official" way to read settings from outside.
+   *
+   * (Since PHP4 doesn't support 'private', we can't hide $this->settings,
+   * nevertheless applications shouldn't access it directly.)
+   */
+  function settings_get($setting_name = NULL) {
+    if (isset($setting_name)) {
+      return $this->settings[$setting_name];
+    } else {
+      return $this->settings;
+    }
+  }
 
   /**
    * Returns a list of all the settings this calendar supports.
