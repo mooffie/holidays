@@ -80,28 +80,30 @@ class HijriCalendar extends NativeCalendar {
       if (isset($date['calendar']) && $date['calendar'] == 'HIJRI') {
         return $date; // it's already hijri
       }
+    }
+    else {
+      $date = $this->_canonizeInputDate($date);
+    }
+
+    // At this point, $date is an array, unless it's invalid.
+
+    if (is_array($date)) {
       if (!empty($date['jdc'])) {
         $jdc = $date['jdc'];
       } else {
         $jdc = gregoriantojd($date['mon'], $date['mday'], $date['year']);
       }
+
       $h = $this->JDToHijri($jdc);
       return array(
         'year'     => $h[2],
         'mon'      => $h[0],
         'mday'     => $h[1],
         'calendar' => 'HIJRI',
-      );
-    }
-    else if (is_numeric($date)) {
-      $decoder = $this->timestamp_decoding_function;
-      return $this->convertToNative($decoder($date));
-    }
-    else if (preg_match('/^(\d\d\d\d)-(\d\d)-(\d\d)(?: |T|$)/', $date, $m)) {
-      return $this->convertToNative(array('jdc' => gregoriantojd($m[2], $m[3], $m[1])));
+      ) + $date; // Merge in the optional hours:minutes:seconds fields.
     }
   }
-  
+
   // Implements NativeCalendar::getLongDate()
   //
   // Formats a hijri date as a human-readable string.
