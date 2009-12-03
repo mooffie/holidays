@@ -130,11 +130,20 @@ class JewishCalendar extends NativeCalendar {
       if (isset($date['calendar']) && $date['calendar'] == CAL_JEWISH) {
         return $date; // it's already jewish
       }
+    }
+    else {
+      $date = $this->_canonizeInputDate($date);
+    }
+
+    // At this point, $date is an array, unless it's invalid.
+
+    if (is_array($date)) {
       if (!empty($date['jdc'])) {
         $jdc = $date['jdc'];
       } else {
         $jdc = gregoriantojd($date['mon'], $date['mday'], $date['year']);
       }
+
       $s = jdtojewish($jdc);
       preg_match(',(\d+)/(\d+)/(\d+),', $s, $m);
       return array(
@@ -142,22 +151,66 @@ class JewishCalendar extends NativeCalendar {
         'mon'      => $m[1],
         'mday'     => $m[2],
         'calendar' => CAL_JEWISH,
-      );
+      ) + $date; // Merge in the optional hours:minutes:seconds fields.
     }
-    else if (is_numeric($date)) {
+  }
+
+  /**
+   * [This is a private function that's used by convertToNative().]
+   *
+   * Get a date and, if it's one of three known formats, returns an array of the
+   * form getdate() returns (possibly with 'jdc' replacing the 'year'/'mon'/'mday').
+   *
+   * The date formats this function recognizes:
+   *
+   * - Unix timestamp.
+   * - PHP5's date object.
+   * - "ISO" string.
+   *
+   * The returned data is a local date (that is, no timezone is considered). In
+   * case of ISO string, it is taken to be local already (In other words, feeding
+   * an ISO string to the calendar is just an alternative to feeding it an array).
+   *
+   * @protected
+   */
+  function _canonizeInputDate($date) {
+    if (is_numeric($date)) {
       // We've got a unix tiemstamp.
       //
-      // Note: there's actually a unixtojd() PHP function, but we aren't using 
+      // Note: there's actually a unixtojd() PHP function, but we aren't using
       // it because we want to give the embedding application a chance to take
       // over the UTC-to-local conversion.
       $decoder = $this->timestamp_decoding_function;
-      return $this->convertToNative($decoder($date));
+      return $decoder($date);
     }
-    else if (preg_match('/^(\d\d\d\d)-(\d\d)-(\d\d)(?: |T|$)/', $date, $m)) {
-      return $this->convertToNative(array('jdc' => gregoriantojd($m[2], $m[3], $m[1])));
+    elseif (is_object($date)) {
+      // PHP5's date object.
+      // should we do is_a($date, 'DateTime') instead? No, we want PHP to bork if
+      // somebody feeds us a wrong object.
+      $timestamp = date_format($date, 'U');
+      return $this->_canonizeInputDate($timestamp);
+    }
+    elseif (is_string($date)) {
+      if (preg_match('/^(\d\d\d\d)-(\d\d)-(\d\d)(?: |T|$)/', $date, $Ymd)) {
+        $parts = array(
+          'jdc' => gregoriantojd($Ymd[2], $Ymd[3], $Ymd[1])
+        );
+        if (preg_match('/^(\d\d):(\d\d)(?::(\d\d))/', $date, $His)) {
+          $parts += array(
+            'hours' => $His[1],
+            'minutes' => $His[2],
+            'seconds' => empty($His[3]) ? 0 : $His[3]
+          );
+        }
+        return $parts;
+      }
+    }
+    else {
+      // It's something else; return as-is.
+      return $date;
     }
   }
-  
+
   // Implements NativeCalendar::getLongDate()
   //
   // Formats a jewish date as a human-readable string.
