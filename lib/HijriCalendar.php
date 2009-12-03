@@ -1,16 +1,18 @@
 <?php
-// $Id: HijriCalendar.php,v 1.3 2008/02/08 13:38:17 mooffie Exp $
+// $Id$
 
 /*
  * @file
- * HijriCalendar, a PHP class representing a Hijri calendar.
+ * A PHP class implementing a Hijri calendar.
  *
- * I got the JDToHijri/HijriToJD algorithm from a user comment in PHP's manual[1] page.
+ * I got the JDToHijri/HijriToJD algorithm from a user comment on PHP's manual[1] page.
  * Code on another[2] site suggested this about the author:
  *
  * "[...] programmed by a kind person who does not ask for any recognition. In his
- * own words; 'There’s no need to give me credit for anything. The coding really 
+ * own words; 'There’s no need to give me credit for anything. The coding really
  * is minimal and I’d prefer the anonymity.'"
+ *
+ * So I take it to be Public Domain.
  *
  * [1] http://php.net/calendar
  * [2] http://www.usayd.com/pluginshacks/hijri-date/
@@ -22,7 +24,7 @@ require_once dirname(__FILE__) .'/NativeCalendar.php';
  * This class represents the Hijri calendar.
  *
  * For documentation for the methods this class provides, see the source for
- * its base calss: NativeCalendar.
+ * its base class: NativeCalendar.
  */
 class HijriCalendar extends NativeCalendar {
 
@@ -61,20 +63,30 @@ class HijriCalendar extends NativeCalendar {
       return $i;
     }
   }
-  
+
   // Implements NativeCalendar::convertToNative()
   //
-  // For your convenience, this function accepts various formats:
+  // For your convenience, this function accepts various input types:
   //
-  // The result of getdate():
-  //   array('year' => ..., 'mon' => ..., 'mday' => ...)
-  // A unix timestamp:
-  //   time()
-  // An ISO date string:
-  //   '2006-12-08'
-  //   '2006-12-08T14:57:12'
-  // A Julian Date Count:
-  //   array('jdc' => ...)
+  // Inputs on which conversion to local date is performed:
+  //
+  //   A unix timestamp:
+  //     time()
+  //   PHP 5's DateTime object:
+  //     date_create('2007-12-30 12:45:10', timezone_open('America/New_York'));
+  //
+  // Inputs which are considered to be local already:
+  //
+  //   The result of getdate():
+  //     array('year' => ..., 'mon' => ..., 'mday' => ...)
+  //   An ISO date string:
+  //     '2006-12-08'
+  //     '2006-12-08T14:57:12'
+  //
+  // Other inputs:
+  //
+  //   A Julian Date Count:
+  //     array('jdc' => ...)
   function convertToNative($date) {
     if (is_array($date)) {
       if (isset($date['calendar']) && $date['calendar'] == 'HIJRI') {

@@ -5,7 +5,7 @@
  * @file
  * PHP classes providing calendars.
  *
- * Copyright (C) 2007 Mooffie <mooffie@typo.co.il>
+ * Copyright (C) Mooffie <mooffie@gmail.com>
  *
  * It is released to the public under the GNU General Public License (GPL).
  */
@@ -272,9 +272,10 @@ class NativeCalendar {
    * - PHP5's date object.
    * - "ISO" string.
    *
-   * The returned data is a local date (that is, no timezone is considered). In
-   * case of ISO string, it is taken to be local already (In other words, feeding
-   * an ISO string to the calendar is just an alternative to feeding it an array).
+   * The returned data is a local date (that is, timezone shifting is performed on
+   * the input). In case of an ISO string, the input is taken to be local already
+   * (In other words, feeding an ISO string to the calendar is just an alternative
+   * to feeding it an explicit year/mon/mday array).
    *
    * @protected
    */

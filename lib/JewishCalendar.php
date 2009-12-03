@@ -3,13 +3,11 @@
 
 /*
  * @file
- * JewishCalendar, a PHP class representing the Jewish calendar.
+ * A PHP class implementing the Jewish calendar.
  *
- * Copyright (C) 2007 Mooffie <mooffie@typo.co.il>
+ * Copyright (C) Mooffie <mooffie@gmail.com>
  *
  * It is released to the public under the GNU General Public License (GPL).
- *
- * TODO: add some comments
  */
 
 require_once dirname(__FILE__) .'/NativeCalendar.php';
@@ -114,17 +112,27 @@ class JewishCalendar extends NativeCalendar {
   
   // Implements NativeCalendar::convertToNative()
   //
-  // For your convenience, this function accepts various formats:
+  // For your convenience, this function accepts various input types:
   //
-  // The result of getdate():
-  //   array('year' => ..., 'mon' => ..., 'mday' => ...)
-  // A unix timestamp:
-  //   time()
-  // An ISO date string:
-  //   '2006-12-08'
-  //   '2006-12-08T14:57:12'
-  // A Julian Date Count:
-  //   array('jdc' => ...)
+  // Inputs on which conversion to local date is performed:
+  //
+  //   A unix timestamp:
+  //     time()
+  //   PHP 5's DateTime object:
+  //     date_create('2007-12-30 12:45:10', timezone_open('America/New_York'));
+  //
+  // Inputs which are considered to be local already:
+  //
+  //   The result of getdate():
+  //     array('year' => ..., 'mon' => ..., 'mday' => ...)
+  //   An ISO date string:
+  //     '2006-12-08'
+  //     '2006-12-08T14:57:12'
+  //
+  // Other inputs:
+  //
+  //   A Julian Date Count:
+  //     array('jdc' => ...)
   function convertToNative($date) {
     if (is_array($date)) {
       if (isset($date['calendar']) && $date['calendar'] == CAL_JEWISH) {
