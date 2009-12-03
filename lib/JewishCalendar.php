@@ -195,7 +195,7 @@ class JewishCalendar extends NativeCalendar {
         $parts = array(
           'jdc' => gregoriantojd($Ymd[2], $Ymd[3], $Ymd[1])
         );
-        if (preg_match('/^(\d\d):(\d\d)(?::(\d\d))/', $date, $His)) {
+        if (preg_match('/(\d\d):(\d\d)(?::(\d\d))?/', $date, $His)) {
           $parts += array(
             'hours' => $His[1],
             'minutes' => $His[2],
