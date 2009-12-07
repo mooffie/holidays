@@ -27,6 +27,9 @@ class NativeCalendar {
    * register a function of your own. Your function must return an array
    * containing three keyed elements: 'year', 'mon', 'mday' (other keys are
    * ignored).
+   *
+   * Ideally, this, and related methods, should be static methods, but we
+   * want PHP4 compatibility.
    */
   function set_timestamp_decoding_function($function) {
     $this->timestamp_decoding_function = $function;
@@ -317,6 +320,24 @@ class NativeCalendar {
     }
   }
 
+  /**
+   * A replacement for <code>getdate(time())</code> that takes your Content
+   * Management System's timezone into account.
+   */
+  function get_todays_date_as_gregorian() {
+    $decoder = $this->timestamp_decoding_function;
+    return $decoder(time());
+  }
+
+  /**
+   * A replacement for <code>unixtojd(time())</code> that takes your Content
+   * Management System's timezone into account.
+   */
+  function get_todays_date_as_jdc() {
+    $parts = $this->get_todays_date_as_gregorian();
+    return gregoriantojd($parts['mon'], $parts['mday'], $parts['year']);
+  }
+
   /*
    * Return the native representation of a number.
    *
@@ -386,7 +407,7 @@ class NativeCalendar {
   function printCal($year, $month)
   {
     $days_in_month = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-    $today_jdc     = unixtojd(time());
+    $todays_jdc    = $this->get_todays_date_as_jdc();
     $prev_dow      = 100; // anything above 7
 
     if ($this->settings['language'] == CAL_LANG_FOREIGN) {
@@ -432,7 +453,7 @@ class NativeCalendar {
           $holiday_names .= "<div class='holiday-name'>$hday[name]</div>\n";
         }
       }
-      if ($jdc == $today_jdc) {
+      if ($jdc == $todays_jdc) {
         $holiday_classes['today'] = 1;
       }
       $holiday_classes = implode(' ', array_keys($holiday_classes));
