@@ -68,13 +68,8 @@ function trans($eng, $heb) {
 
 // @todo: give this poor function a bit more love!
 function get_ical_feed($cal, $year, $month, $years_count) {
-  if ($cal->isDiaspora()) {
-    $title = "Jewish Calendar, Method: Diaspora";
-  } else {
-    $title = "Jewish Calendar, Method: Israel";
-  }
   $output  = "BEGIN:VCALENDAR\nVERSION:2.0\n";
-  $output .= "X-WR-CALNAME:$title\n";
+  $output .= 'X-WR-CALNAME:' . $cal->ical_title() . "\n";
   $jdc = gregoriantojd($month, 1, $year);
   for ($n = $years_count * 365; $n--; ) {
     $holidays = $cal->getHolidays(array('jdc' => $jdc));

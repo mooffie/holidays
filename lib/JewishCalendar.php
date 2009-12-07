@@ -61,6 +61,20 @@ class JewishCalendar extends NativeCalendar {
     }
   }
 
+  // Implements NativeCalendar::ical_title()
+  function ical_title() {
+    $title = $this->title();
+    if ($this->settings['language'] == CAL_LANG_NATIVE) {
+      $title .= ', שיטה: ' . ($this->isDiaspora() ? 'גולה' : 'ארץ ישראל');
+    } else {
+      // We may not be running under Drupal. In this case we may have an
+      // inferior t() with no support for placeholders.
+      $title .= ', ' . ($this->isDiaspora() ? t('Method: Diaspora') : t('Method: Israel'));
+    }
+    return $title;
+  }
+
+
   function isDiaspora() {
     // A future version may have a third option, 'detect_by_ip'.
     return $this->settings['method'] != 'israel';

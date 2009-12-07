@@ -105,6 +105,13 @@ class NativeCalendar {
   }
 
   /**
+   * The title for an iCal feed. Usually the same as title().
+   */
+  function ical_title() {
+    return $this->title();
+  }
+
+  /**
    * Overridable; Return TRUE if the calendar's native language is right to left.
    */
   function is_rtl() {
