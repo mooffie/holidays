@@ -39,3 +39,13 @@ function assert_array_contains($array, $contains, $test_name) {
 
   print "Test '$test_name' succeded\n";
 }
+
+function assert_that($condition, $test_name) {
+  if ($condition) {
+    print "Test '$test_name' succeded\n";
+  }
+  else {
+    print "Test '$test_name' failed\n";
+    exit(1);
+  }
+}

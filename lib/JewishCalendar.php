@@ -49,6 +49,7 @@ class JewishCalendar extends NativeCalendar {
       'isru' => FALSE,
       'sefirat_omer' => FALSE,
     );
+    $this->cache = array();
   }
 
   // Implements NativeCalendar::title()
@@ -89,6 +90,12 @@ class JewishCalendar extends NativeCalendar {
       '#default_value' => $this->settings['sefirat_omer'],
     );
     return $form;
+  }
+
+  // Override base to clear cache whenever a setting changes.
+  function settings($settings) {
+    $this->cache = array();
+    return parent::settings($settings);
   }
 
   // Implements NativeCalendar::is_rtl()
@@ -235,7 +242,11 @@ class JewishCalendar extends NativeCalendar {
   
   // Implements NativeCalendar::getHolidays()
   function getHolidays($date) {
-    static $cache;
+    if (!isset($this->cache[__FUNCTION__])) {
+      $this->cache[__FUNCTION__] = array();
+    }
+    $cache =& $this->cache[__FUNCTION__];
+
     $holiday_details = $this->_getHolidayDetails();
 
     $j_date = $this->convertToNative($date);
@@ -244,9 +255,6 @@ class JewishCalendar extends NativeCalendar {
     $j_month = $j_date['mon'];
     $j_day   = $j_date['mday'];
 
-    if (!isset($cache)) {
-      $cache = array();
-    }
     if (!isset($cache[$j_year][$j_month])) {
       $cache[$j_year][$j_month] = $this->_buildHolidays($j_year, $j_month);
     }
