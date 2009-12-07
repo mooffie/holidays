@@ -68,7 +68,7 @@ function trans($eng, $heb) {
 
 // @todo: give this poor function a bit more love!
 function get_ical_feed($cal, $year, $month, $years_count) {
-  if ($cal->settings['diaspora']) {
+  if ($cal->isDiaspora()) {
     $title = "Jewish Calendar, Method: Diaspora";
   } else {
     $title = "Jewish Calendar, Method: Israel";

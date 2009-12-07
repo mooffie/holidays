@@ -52,7 +52,7 @@ $isru = get_param('isru', '0');
 $jcal = NativeCalendar::factory('Jewish');
 $jcal->settings(array(
   'language' => ($language == 'he' ? CAL_LANG_NATIVE : CAL_LANG_FOREIGN),
-  'diaspora' => ($method == 'diaspora'),
+  'method' => $method,
   'sefirat_omer' => $sefirat_omer,
   'eves' => $eves,
   'isru' => $isru,

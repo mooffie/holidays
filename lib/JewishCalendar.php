@@ -44,7 +44,7 @@ class JewishCalendar extends NativeCalendar {
     parent::NativeCalendar();
     // Initialize defaults:
     $this->settings += array(
-      'diaspora' => FALSE,
+      'method' => 'israel', // Either 'israel' or 'diaspora'.
       'eves' => TRUE,
       'isru' => FALSE,
       'sefirat_omer' => FALSE,
@@ -61,18 +61,23 @@ class JewishCalendar extends NativeCalendar {
     }
   }
 
+  function isDiaspora() {
+    // A future version may have a third option, 'detect_by_ip'.
+    return $this->settings['method'] != 'israel';
+  }
+
   // Implements NativeCalendar::settings_form()
   function settings_form() {
     $form = parent::settings_form();
-    $form['diaspora'] = array(
+    $form['method'] = array(
       '#type' => 'radios',
       '#title' => t('Method'),
       '#description' => t('The method used to calculate the holidays. Some holidays are observed two days when outside of Israel.'),
       '#options' => array(
-        1 => t('Diaspora'),
-        0 => t('Land of Israel'),
+        'diaspora' => t('Diaspora'),
+        'israel'   => t('Land of Israel'),
       ),
-      '#default_value' => (int)$this->settings['diaspora'],
+      '#default_value' => $this->settings['method'],
     );
     $form['eves'] = array(
       '#type'  => 'checkbox',
@@ -284,7 +289,7 @@ class JewishCalendar extends NativeCalendar {
 
     // shorthands
     $sefirat_omer = $this->settings['sefirat_omer'];
-    $diaspora     = $this->settings['diaspora'];
+    $diaspora     = $this->isDiaspora();
     $isru         = $this->settings['isru'];
     $eves         = $this->settings['eves'];
 

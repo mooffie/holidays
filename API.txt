@@ -19,7 +19,7 @@ $jcal = NativeCalendar::factory('Jewish'); // In the future there may be Drivers
 
 $jcal->settings(array(
   'language' => CAL_LANG_NATIVE, // Speak in Hebrew, not English.
-  'diaspora' => FALSE,           // We don't live abroad.
+  'method'   => 'israel',        // Can be either 'israel' or 'diaspora'.
   'eves'     => TRUE,            // Give us 'Erev Rosh HaShana' too.
 ));
 

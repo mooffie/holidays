@@ -35,9 +35,9 @@ assert_array_contains($cal->convertToNative('2009-12-03'), 'year:5770 mon:3 mday
 
 assert_array_contains($cal->convertToNative('2009-12-03 12:47:33'), 'seconds:33', 'time parts are not lost');
 
-$cal->settings(array('diaspora' => TRUE));
+$cal->settings(array('method' => 'diaspora'));
 assert_that(count($cal->getHolidays("2006-10-14")) == 1, 'sanity check');
 $cal->tweakHolidaysCache();
 assert_that(count($cal->getHolidays("2006-10-14")) == 3, 'holidays cache');
-$cal->settings(array('diaspora' => FALSE));
+$cal->settings(array('method' => 'israel'));
 assert_that(count($cal->getHolidays("2006-10-14")) == 2, 'calling settings() should reset cache');
