@@ -423,10 +423,10 @@ class NativeCalendar {
       $days_of_week = $this->getDaysOfWeek();
     }
 
-    $output  = "<table class='calendar'>";
+    $output  = "<table class='holidays-calendar'>";
     $output .= "<tr>";
     foreach ($days_of_week as $day) {
-      $output .= "<td class='day-header'>$day</td>";
+      $output .= "<th class='day-header'>$day</td>";
     }
     $output .= "</tr>";
 

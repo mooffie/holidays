@@ -1,6 +1,6 @@
 /* $Id$ */
 
-table.calendar {
+table.holidays-calendar {
   border-collapse: collapse;
 }
 
@@ -22,7 +22,7 @@ td.day {
   background-color: #fff;
 }
 
-td.day-header {
+th.day-header {
   text-align: center;
   font-weight: bolder;
   font-size: smaller;
