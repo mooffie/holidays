@@ -189,10 +189,10 @@ class JewishCalendar extends NativeCalendar {
     }
   }
 
-  // Implements NativeCalendar::getLongDate()
+  // Implements NativeCalendar::getMediumDate()
   //
   // Formats a jewish date as a human-readable string.
-  function getLongDate($date)
+  function getMediumDate($date)
   {    
     $j_date = $this->convertToNative($date);
     if ($this->settings['language'] == CAL_LANG_NATIVE) {

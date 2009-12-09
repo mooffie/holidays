@@ -77,14 +77,14 @@ Holidays for 2007-10-09:
 
 <pre>
 // Print today's date:
-print $jcal->getLongDate(time()) ."\n";
+print $jcal->getMediumDate(time()) ."\n";
 
 // Now in English:
 $jcal->settings(array('language' => CAL_LANG_FOREIGN));
-print $jcal->getLongDate(time()) ."\n";
+print $jcal->getMediumDate(time()) ."\n";
 
 // When did the first man land on the moon?
-print $jcal->getLongDate('1969-07-20') ."\n";
+print $jcal->getMediumDate('1969-07-20') ."\n";
 </pre>
 
 <p>...which outputs:</p>

@@ -149,7 +149,7 @@ class NativeCalendar {
    * (Note: "clone" is a reserved word in PHP, so we name it "copy" instead).
    *
    * This is merely "syntactic sugar". It allows you to write, e.g.,
-   * <code>print some_factory('Jewish')->copy()->settings(...)->getLongDate(time())</code>
+   * <code>print some_factory('Jewish')->copy()->settings(...)->getMediumDate(time())</code>
    *
    * (In that specific example we use ->copy() in order to not affect the 
    * object that some_factory() may potentially cache.)
@@ -390,8 +390,8 @@ class NativeCalendar {
    * @param date
    * @return string
    */ 
-  function getLongDate($date) {
-    die('Error: pure virtual function NativeCalendar::getLongDate() called');
+  function getMediumDate($date) {
+    die('Error: pure virtual function NativeCalendar::getMediumDate() called');
   }
   
 

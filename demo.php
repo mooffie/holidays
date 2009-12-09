@@ -142,8 +142,8 @@ print_link(trans('Next month', 'החודש הבא'), create_url($year, $month + 
 
 print "</div>"; // <!-- .navigator -->
 
-$start_date_str = $jcal->getLongDate(array('year'=>$year, 'mon'=>$month, 'mday'=>1));
-$end_date_str   = $jcal->getLongDate(array('year'=>$year, 'mon'=>$month, 'mday'=>cal_days_in_month(CAL_GREGORIAN, $month, $year)));
+$start_date_str = $jcal->getMediumDate(array('year'=>$year, 'mon'=>$month, 'mday'=>1));
+$end_date_str   = $jcal->getMediumDate(array('year'=>$year, 'mon'=>$month, 'mday'=>cal_days_in_month(CAL_GREGORIAN, $month, $year)));
 
 print "<div class='calendar-range'>";
 print "$start_date_str &#x2013; $end_date_str";

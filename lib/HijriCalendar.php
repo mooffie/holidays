@@ -116,10 +116,10 @@ class HijriCalendar extends NativeCalendar {
     }
   }
 
-  // Implements NativeCalendar::getLongDate()
+  // Implements NativeCalendar::getMediumDate()
   //
   // Formats a hijri date as a human-readable string.
-  function getLongDate($date)
+  function getMediumDate($date)
   {
     $h_date = $this->convertToNative($date);
     return sprintf('%s %s %s', 
