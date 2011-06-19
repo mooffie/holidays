@@ -8,6 +8,8 @@
 
 error_reporting(E_ALL);
 
+date_default_timezone_set('Asia/Jerusalem'); // We have to set something or else PHP will complain.
+
 require_once dirname(__FILE__) .'/lib/NativeCalendar.php'; // Provides the calendar object. The 'engine.'
 require_once dirname(__FILE__) .'/demo.inc'; // Utility functions
 
@@ -201,7 +203,7 @@ if ($language == 'he' && $method == 'diaspora') {
   תזכורת: מכיוון שאתה צופה בגרסה העברית של לוח השנה, יתכן שאתה מצפה לראות את מועדי החגים כפי שהם
   נהוגים בארץ ישראל. שנה ל"ארץ ישראל" את הבחירה בתפריט "שיטה" כדי שכך יהיה.
   </div>
-<?
+<?php
 }
 print "</fieldset>\n";
 
