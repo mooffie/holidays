@@ -18,7 +18,7 @@ define('CAL_LANG_NATIVE',  1);
  */
 class NativeCalendar {
 
-  var $timestamp_decoding_function = 'getdate';
+  static $timestamp_decoding_function = 'getdate';
 
   /**
    * When the calendar is asked to convert a unix timestamp to a native date,
@@ -27,12 +27,9 @@ class NativeCalendar {
    * register a function of your own. Your function must return an array
    * containing three keyed elements: 'year', 'mon', 'mday' (other keys are
    * ignored).
-   *
-   * Ideally, this, and related methods, should be static methods, but we
-   * want PHP4 compatibility.
    */
-  function set_timestamp_decoding_function($function) {
-    $this->timestamp_decoding_function = $function;
+  static function set_timestamp_decoding_function($function) {
+    self::$timestamp_decoding_function = $function;
   }
 
   /**
@@ -45,7 +42,7 @@ class NativeCalendar {
    * @param string $id
    * @return object
    */
-  function factory($id, $settings = NULL) {
+  static function factory($id, $settings = NULL) {
     $filename = dirname(__FILE__) .'/'. $id .'Calendar.php';
     if (!file_exists($filename)) {
       return NULL;
@@ -67,7 +64,7 @@ class NativeCalendar {
    * @static
    * @return array
    */
-  function factory_list() {
+  static function factory_list() {
     static $list = array();
     if ($list) {
       return $list;
@@ -296,7 +293,7 @@ class NativeCalendar {
       // Note: there's actually a unixtojd() PHP function, but we aren't using
       // it because we want to give the embedding application a chance to take
       // over the UTC-to-local conversion.
-      $decoder = $this->timestamp_decoding_function;
+      $decoder = self::$timestamp_decoding_function;
       return $decoder($date);
     }
     elseif (is_object($date)) {
@@ -332,7 +329,7 @@ class NativeCalendar {
    * Management System's timezone into account.
    */
   function get_todays_date_as_gregorian() {
-    $decoder = $this->timestamp_decoding_function;
+    $decoder = self::$timestamp_decoding_function;
     return $decoder(time());
   }
 
